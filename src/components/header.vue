@@ -16,7 +16,7 @@ export default {
 
 <style scoped lang="scss">
 header{
-    background-color: #2E3A46;
+    background-color: #202020;
     color: red;
     font-size: 30px;
     padding: 20px;

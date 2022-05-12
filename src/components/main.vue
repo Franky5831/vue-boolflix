@@ -1,23 +1,40 @@
 <template>
 <main>
     <div id="search">
-        <input v-model="searchText" placeholder="cerca"> 
-        <button @keydown.enter="search(searchText)" @click="search(searchText)">vai</button>
+        <input @keydown.enter="search(searchText)" v-model="searchText" placeholder="cerca"> 
+        <button @click="search(searchText)">vai</button>
     </div>
     <div id="resoultsSearch">
-    <ul>
         <h1 v-show="this.showRes">Films</h1>
-        <li v-for="film in movies" :key="film.id">
-        film: {{film.title}}
-        </li>
-    </ul>
-    <ul>
+
+
+        <ul>
+            <li v-for="film in movies" :key="film.id">
+                <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  film.poster_path + ')' }">
+                    <h1>{{film.title}}</h1>
+                </div>
+            </li>
+        </ul>
+
         <h1 v-show="this.showRes">Serie TV</h1>
-        <li v-for="tv in series" :key="tv.id">
-        serie: {{tv.original_name}}
-        </li>
-    </ul>
+        <ul>
+            <li v-for="tv in series" :key="tv.id">
+                <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  tv.poster_path + ')' }">
+                    <h1>{{tv.original_name}}</h1>
+                </div>
+            </li>
+        </ul>
     </div>
+
+
+        <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper-slide v-for="film in movies" :key="film.id">
+                <img src="https://i.picsum.photos/id/30/600/400.jpg?hmac=QGENXeC2x6xxU2QMmK6evLtkxRm0t0Eakcnd3lHOKBs">
+            </swiper-slide>
+        </swiper>
+
+
+
 
 </main>
 </template>
@@ -25,7 +42,21 @@
 
 <script>
 import axios from 'axios';
+
+import { Navigation, Pagination } from 'swiper'
+import { SwiperCore, Swiper, SwiperSlide } from 'swiper-vue2'
+import 'swiper/swiper-bundle.css'
+
+SwiperCore.use([Navigation, Pagination])
+
+
 export default{
+    components: {
+        Swiper,
+        SwiperSlide
+    },
+
+
     name: 'AppMain',
     data(){
         return{
@@ -38,6 +69,17 @@ export default{
         }
     },
     methods:{
+        getImageUrl (imageId) {
+            return `https://picsum.photos/600/400/?image=${imageId}`
+        },
+        onSwiper (swiper) {
+            console.log(swiper)
+        },
+        onSlideChange () {
+            console.log('slide change')
+        },
+
+
         search(text){
             const queryData = {
                 params:{
@@ -69,6 +111,27 @@ export default{
 </script>
 
 <style scoped lang="scss">
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.w-100 {
+  width: 100%;
+}
+.ml-auto, .mx-auto {
+  margin-left: auto;
+}
+.mr-auto, .mx-auto {
+  margin-right: auto;
+}
+
+
+
+
+
+
+
+
 main{
     margin: 20px 50px;
 
@@ -88,6 +151,40 @@ main{
             height: 100%;
         }
     }
+    #resoultsSearch{
+        display: flex;
+        flex-direction: column;
 
+        ul{
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+            li{
+                list-style-type: none;
+
+                    .card{
+                        width: 350px;
+                        height: 500px;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+
+
+                        h1 {
+                            text-align: end;
+                              vertical-align: text-bottom;
+                            width: 100%;
+                            font-size: 25px;
+                            -webkit-text-stroke: 1px black;
+                            color: white;
+                            text-shadow: 0px 0px #000,
+                        }
+                    }
+            }
+        }
+    }
 }
 </style>

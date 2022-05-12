@@ -29,5 +29,6 @@ export default {
 body{
   background-color: #141414;
   color: white;
+font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 </style>
