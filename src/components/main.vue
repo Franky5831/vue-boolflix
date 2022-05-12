@@ -1,7 +1,10 @@
 <template>
 <main>
-    <input v-model="searchText" placeholder="cerca"> 
-    <button @click="search(searchText)">vai</button>
+    <div id="search">
+        <input v-model="searchText" placeholder="cerca"> 
+        <button @keyup.enter="search(searchText)" @click="search(searchText)">vai</button>
+    </div>
+    <div id="resoultsSearch">
     <ul>
         <h1 v-show="this.showRes">Films</h1>
         <li v-for="film in movies" :key="film.id">
@@ -14,6 +17,8 @@
         serie: {{tv.original_name}}
         </li>
     </ul>
+    </div>
+
 </main>
 </template>
 
@@ -66,5 +71,23 @@ export default{
 <style scoped lang="scss">
 main{
     margin: 20px 50px;
+
+    #search{
+        display: flex;
+        height: 40px;
+        
+        input{
+            width: calc(100% - 70px);
+            height: 100%;
+            font-size: 30px;
+            padding-left: 20px;
+        }
+        button{
+            font-size: 30px;
+            width: 70px;
+            height: 100%;
+        }
+    }
+
 }
 </style>
