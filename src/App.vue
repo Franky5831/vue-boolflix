@@ -27,6 +27,7 @@ export default {
   box-sizing: border-box;
 }
 body{
-      background-color: #1E2D3B;
+  background-color: #141414;
+  color: white;
 }
 </style>

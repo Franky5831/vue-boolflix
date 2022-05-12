@@ -1,6 +1,6 @@
 <template>
 <header>
-    <h1>header</h1>
+    <h1>Boolflix</h1>
 </header>
 </template>
 
@@ -17,6 +17,9 @@ export default {
 <style scoped lang="scss">
 header{
     background-color: #2E3A46;
+    color: red;
+    font-size: 30px;
+    padding: 20px;
 
     img{
         height: 100px;
