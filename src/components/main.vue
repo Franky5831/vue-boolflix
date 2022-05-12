@@ -8,30 +8,25 @@
         <h1 v-show="this.showRes">Films</h1>
 
 
-        <ul>
-            <li v-for="film in movies" :key="film.id">
+        <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper-slide v-for="film in movies" :key="film.id">
                 <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  film.poster_path + ')' }">
                     <h1>{{film.title}}</h1>
                 </div>
-            </li>
-        </ul>
+            </swiper-slide>
+        </swiper>
 
         <h1 v-show="this.showRes">Serie TV</h1>
-        <ul>
-            <li v-for="tv in series" :key="tv.id">
+        <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper-slide v-for="tv in series" :key="tv.id">
                 <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  tv.poster_path + ')' }">
                     <h1>{{tv.original_name}}</h1>
                 </div>
-            </li>
-        </ul>
+            </swiper-slide>
+        </swiper>
     </div>
 
 
-        <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide v-for="film in movies" :key="film.id">
-                <img src="https://i.picsum.photos/id/30/600/400.jpg?hmac=QGENXeC2x6xxU2QMmK6evLtkxRm0t0Eakcnd3lHOKBs">
-            </swiper-slide>
-        </swiper>
 
 
 
@@ -130,7 +125,10 @@ export default{
 
 
 
-
+.swiper-slide{
+    width: 350px;
+    margin: 20px;
+}
 
 main{
     margin: 20px 50px;
@@ -154,37 +152,24 @@ main{
     #resoultsSearch{
         display: flex;
         flex-direction: column;
-
-        ul{
-            display: flex;
-            gap: 20px;
-            margin-bottom: 50px;
-            li{
-                list-style-type: none;
-
-                    .card{
-                        width: 350px;
-                        height: 500px;
-                        background-repeat: no-repeat;
-                        background-size: cover;
-
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-end;
-
-
-                        h1 {
-                            text-align: end;
-                              vertical-align: text-bottom;
-                            width: 100%;
-                            font-size: 25px;
-                            -webkit-text-stroke: 1px black;
-                            color: white;
-                            text-shadow: 0px 0px #000,
-                        }
-                    }
+            .card{
+                width: 350px;
+                height: 500px;
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                h1 {
+                    text-align: end;
+                      vertical-align: text-bottom;
+                    width: 100%;
+                    font-size: 25px;
+                    -webkit-text-stroke: 1px black;
+                    color: white;
+                    text-shadow: 0px 0px #000,
+                }
             }
-        }
     }
 }
 </style>
