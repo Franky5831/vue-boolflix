@@ -2,7 +2,7 @@
 <main>
     <div id="search">
         <input v-model="searchText" placeholder="cerca"> 
-        <button @keyup.enter="search(searchText)" @click="search(searchText)">vai</button>
+        <button @keydown.enter="search(searchText)" @click="search(searchText)">vai</button>
     </div>
     <div id="resoultsSearch">
     <ul>
