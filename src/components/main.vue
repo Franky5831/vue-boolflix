@@ -1,6 +1,7 @@
 <template>
 <main>
-    <button @click="search('star')">clickami</button>
+    <input v-model="searchText" placeholder="cerca"> 
+    <button @click="search(searchText)">vai</button>
     <ul>
         <h1 v-show="this.showRes">Films</h1>
         <li v-for="film in movies" :key="film.id">
@@ -27,7 +28,8 @@ export default{
             series: [],
             apiKey: '9c08889b4156aa846587f4aff22355b6',
             apiPath: 'https://api.themoviedb.org/3/search/',
-            showRes: false
+            showRes: false,
+            searchText: '',
         }
     },
     methods:{
