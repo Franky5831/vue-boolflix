@@ -27,6 +27,30 @@
     </div>
 
 
+        <swiper
+      :slides-per-view="5"
+      :space-between="30"
+      :loop="true"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+    >
+      <swiper-slide
+        v-for="film in movies"
+        :key="film.id"
+        class="test"
+        :class="{test_2: true}"
+      >
+        <img
+          :src="getImageUrl(29)"
+          width="600"
+          height="400"
+          class="img-fluid w-100 mx-auto"
+          blank="true"
+        >
+      </swiper-slide>
+    </swiper>
+
+
 
 
 
