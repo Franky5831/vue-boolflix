@@ -17,15 +17,41 @@
         </swiper>
 
         <h1 v-show="this.showRes">Serie TV</h1>
-        <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
+        <swiper :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="tv in series" :key="tv.id">
                 <div blank="true" class="card test img-fluid w-100 mx-auto" :class="{test_2: true}" >
                     <img src='https://img.animeworld.tv/locandine/uvprg.jpg'>
-                    <img src="" alt="">
                 </div>
             </swiper-slide>
         </swiper>
     </div>
+
+
+
+
+
+        <swiper
+      :slides-per-view="3"
+      :space-between="30"
+      :loop="true"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+    >
+      <swiper-slide
+        v-for="(tv, index) in series"
+        :key="index"
+        class="test"
+        :class="{test_2: true}"
+      >
+        <img
+          src="https://i.picsum.photos/id/32/600/400.jpg?hmac=nmoK32Lpfqcg85iHyNxf1t1fD69dL4HMZN0I3KBAsOo"
+          width="600"
+          height="400"
+          class="img-fluid w-100 mx-auto"
+          blank="true"
+        >
+      </swiper-slide>
+    </swiper>
 
 
 
