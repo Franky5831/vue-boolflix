@@ -8,7 +8,7 @@
         <h1 v-show="this.showRes">Films</h1>
 
 
-        <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
+        <swiper :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="film in movies" :key="film.id" @mouseover="hover = true" @mouseleave="hover = false">
                 <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  film.poster_path + ')' }">
                     <h1 v-if="hover">{{film.title}}</h1>
@@ -19,36 +19,16 @@
         <h1 v-show="this.showRes">Serie TV</h1>
         <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="tv in series" :key="tv.id">
-                <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  tv.poster_path + ')' }">
-                    <h1>{{tv.original_name}}</h1>
+                <div blank="true" class="card test img-fluid w-100 mx-auto" :class="{test_2: true}" >
+                    <img src='https://img.animeworld.tv/locandine/uvprg.jpg'>
+                    <img src="" alt="">
                 </div>
             </swiper-slide>
         </swiper>
     </div>
 
 
-        <swiper
-      :slides-per-view="5"
-      :space-between="30"
-      :loop="true"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-    >
-      <swiper-slide
-        v-for="film in movies"
-        :key="film.id"
-        class="test"
-        :class="{test_2: true}"
-      >
-        <img
-          :src="getImageUrl(29)"
-          width="600"
-          height="400"
-          class="img-fluid w-100 mx-auto"
-          blank="true"
-        >
-      </swiper-slide>
-    </swiper>
+
 
 
 
