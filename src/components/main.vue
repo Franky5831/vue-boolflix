@@ -9,9 +9,9 @@
 
 
         <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide v-for="film in movies" :key="film.id">
+            <swiper-slide v-for="film in movies" :key="film.id" @mouseover="hover = true" @mouseleave="hover = false">
                 <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  film.poster_path + ')' }">
-                    <h1>{{film.title}}</h1>
+                    <h1 v-if="hover">{{film.title}}</h1>
                 </div>
             </swiper-slide>
         </swiper>
@@ -61,6 +61,7 @@ export default{
             apiPath: 'https://api.themoviedb.org/3/search/',
             showRes: false,
             searchText: '',
+            hover: false
         }
     },
     methods:{
