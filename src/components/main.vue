@@ -5,10 +5,9 @@
         <button @click="search(searchText)">vai</button>
     </div>
     <div id="resoultsSearch">
+
         <h1 v-show="this.showRes">Films</h1>
-
-
-        <swiper :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
+        <swiper v-show="this.showRes" :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="film in movies" :key="film.id" @mouseover="hover = true" @mouseleave="hover = false">
                 <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  film.poster_path + ')' }">
                     <h1 v-if="hover">{{film.title}}</h1>
@@ -17,10 +16,10 @@
         </swiper>
 
         <h1 v-show="this.showRes">Serie TV</h1>
-        <swiper :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide v-for="tv in series" :key="tv.id">
-                <div blank="true" class="card test img-fluid w-100 mx-auto" :class="{test_2: true}" >
-                    <img src='https://img.animeworld.tv/locandine/uvprg.jpg'>
+        <swiper :slides-per-view="4" :space-between="30" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper-slide v-for="tv in series" :key="tv">
+                <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  tv.poster_path + ')' }">
+                    <h1 v-if="hover">{{tv.title}}</h1>
                 </div>
             </swiper-slide>
         </swiper>
@@ -30,7 +29,7 @@
 
 
 
-        <swiper
+    <swiper
       :slides-per-view="3"
       :space-between="30"
       :loop="true"
@@ -38,18 +37,12 @@
       @slideChange="onSlideChange"
     >
       <swiper-slide
-        v-for="(tv, index) in series"
-        :key="index"
+        v-for="k in testArray"
+        :key="k"
         class="test"
         :class="{test_2: true}"
       >
-        <img
-          src="https://i.picsum.photos/id/32/600/400.jpg?hmac=nmoK32Lpfqcg85iHyNxf1t1fD69dL4HMZN0I3KBAsOo"
-          width="600"
-          height="400"
-          class="img-fluid w-100 mx-auto"
-          blank="true"
-        >
+        <img :src= 'k.image'>
       </swiper-slide>
     </swiper>
 
@@ -85,6 +78,13 @@ export default{
     name: 'AppMain',
     data(){
         return{
+            testArray: [
+                {image: 'https://img.animeworld.tv/locandine/GDU38.jpg'},
+                {image: 'https://img.animeworld.tv/locandine/tobJD.png'},
+                {image: 'https://img.animeworld.tv/locandine/mQfAm.jpg?0'},
+                {image: 'https://img.animeworld.tv/locandine/uvprg.jpg'},
+            ],
+
             movies: [],
             series: [],
             apiKey: '9c08889b4156aa846587f4aff22355b6',
