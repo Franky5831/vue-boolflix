@@ -16,11 +16,6 @@
         </swiper>
 
         <h1 v-show="this.showRes">Serie TV</h1>
-
-
-
-
-
         <swiper v-show="this.showRes" :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="tv in series" :key="tv">
                 <div class="card">
@@ -74,7 +69,7 @@ export default{
                 {image: 'https://img.animeworld.tv/locandine/Uamqh.png?0'}
             ],
 
-            movies: [{poster_path: '/61J34xHVVdQHbJ4MSCWQo4e727v.jpg'}],
+            movies: [],
             series: [],
             apiKey: '9c08889b4156aa846587f4aff22355b6',
             apiPath: 'https://api.themoviedb.org/3/search/',
