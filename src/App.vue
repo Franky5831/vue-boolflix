@@ -11,10 +11,11 @@ import AppMain from './components/main.vue'
 
 export default {
   name: 'App',
-  components:{
+  components: {
     AppHeader,
     AppMain
-  }
+  },
+  //props: {searchText: '',}
 }
 
 

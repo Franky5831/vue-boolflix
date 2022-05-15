@@ -9,7 +9,23 @@
         <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="film in movies" :key="film.id" @mouseover="hover = true" @mouseleave="hover = false">
                 <div class="card">
-                    <img :src= "'https://image.tmdb.org/t/p/w342/'+  film.poster_path">
+                    <div class="posterCard">
+                        <img :src= "'https://image.tmdb.org/t/p/w342/'+  film.poster_path">
+                    </div>
+                    <div class="infoCard">
+                        <h1>{{film.original_title}}</h1>
+                        <h2>{{film.overview}}</h2>
+                        <div>
+                            <ul>
+                                <li v-for="n in Math.round(film.vote_average / 2)" :key="n">
+                                <font-awesome-icon icon="fa-solid fa-star" />
+                                </li>
+                                <li v-for="n in (5 - Math.round(film.vote_average / 2))" :key="n">
+                                <font-awesome-icon icon="fa-regular fa-star" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </swiper-slide>
         </swiper>
@@ -50,7 +66,6 @@ export default{
             apiKey: '9c08889b4156aa846587f4aff22355b6',
             apiPath: 'https://api.themoviedb.org/3/search/',
             searchText: '',
-            hover: false
         }
     },
     computed: {
@@ -136,20 +151,41 @@ main{
         }
     }
     #resoultsSearch{
+        >h1{
+            margin-top: 50px;
+        }
+        .card:hover > .infoCard{
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover > .posterCard{
+            display: none;
+        }
             .card{
+                cursor: pointer;
                 width: 350px;
                 height: 500px;
                 background-repeat: no-repeat;
                 background-size: cover;
-                h1 {
-                    text-align: end;
-                    vertical-align: text-bottom;
-                    width: 100%;
-                    font-size: 25px;
-                    -webkit-text-stroke: 1px black;
-                    color: white;
-                    text-shadow: 0px 0px #000,
+                :active{
+                    cursor: grabbing;
                 }
+                .infoCard{
+                    display: none;
+                    overflow: hidden;
+                    text-align: center;
+                    background-color: rgb(43, 43, 43);
+                    height: 100%;
+
+                    h1{
+                        margin-bottom: 20px;
+                    }
+                    h2{
+                        color: rgb(180, 180, 180);
+                        font-size: 1.3rem;
+                    }
+                }
+
             }
     }
 }
