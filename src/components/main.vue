@@ -9,14 +9,14 @@
         <h1 v-show="this.showRes">Films</h1>
         <swiper v-show="this.showRes" :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="film in movies" :key="film.id" @mouseover="hover = true" @mouseleave="hover = false">
-                <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  film.poster_path + ')' }">
-                    <h1 v-if="hover">{{film.title}}</h1>
+                <div class="card">
+                    <img :src= "'https://image.tmdb.org/t/p/w342/'+  film.poster_path">
                 </div>
             </swiper-slide>
         </swiper>
 
         <h1 v-show="this.showRes">Serie TV</h1>
-        <swiper :slides-per-view="4" :space-between="30" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
+        <swiper :slides-per-view="4" :space-between="30" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="tv in series" :key="tv">
                 <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  tv.poster_path + ')' }">
                     <h1 v-if="hover">{{tv.title}}</h1>
@@ -27,9 +27,8 @@
 
 
 
-
-
-    <swiper
+<div id="cont" v-if="series" >
+        <swiper
       :slides-per-view="3"
       :space-between="30"
       :loop="true"
@@ -45,6 +44,9 @@
         <img :src= 'k.image'>
       </swiper-slide>
     </swiper>
+</div>
+
+
 
 
 
@@ -83,9 +85,11 @@ export default{
                 {image: 'https://img.animeworld.tv/locandine/tobJD.png'},
                 {image: 'https://img.animeworld.tv/locandine/mQfAm.jpg?0'},
                 {image: 'https://img.animeworld.tv/locandine/uvprg.jpg'},
+                {image: 'https://img.animeworld.tv/locandine/i2BMr.jpg?0'},
+                {image: 'https://img.animeworld.tv/locandine/Uamqh.png?0'}
             ],
 
-            movies: [],
+            movies: [{poster_path: '/61J34xHVVdQHbJ4MSCWQo4e727v.jpg'}],
             series: [],
             apiKey: '9c08889b4156aa846587f4aff22355b6',
             apiPath: 'https://api.themoviedb.org/3/search/',
@@ -95,9 +99,6 @@ export default{
         }
     },
     methods:{
-        getImageUrl (imageId) {
-            return `https://picsum.photos/600/400/?image=${imageId}`
-        },
         onSwiper (swiper) {
             console.log(swiper)
         },
@@ -117,6 +118,7 @@ export default{
             this.getSeries(queryData);
             this.showRes = true;
             console.log(this.showRes)
+            console.log(this.film.poster_path)
         },
         getMovies(queryData){
             axios.get(this.apiPath+'movie', queryData).then((ris)=>{
@@ -181,19 +183,14 @@ main{
         }
     }
     #resoultsSearch{
-        display: flex;
-        flex-direction: column;
             .card{
                 width: 350px;
                 height: 500px;
                 background-repeat: no-repeat;
                 background-size: cover;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
                 h1 {
                     text-align: end;
-                      vertical-align: text-bottom;
+                    vertical-align: text-bottom;
                     width: 100%;
                     font-size: 25px;
                     -webkit-text-stroke: 1px black;
