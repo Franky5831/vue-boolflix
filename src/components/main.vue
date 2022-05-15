@@ -16,35 +16,20 @@
         </swiper>
 
         <h1 v-show="this.showRes">Serie TV</h1>
-        <swiper :slides-per-view="4" :space-between="30" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
+
+
+
+
+
+        <swiper v-show="this.showRes" :slides-per-view="4" :loop="false" @swiper="onSwiper" @slideChange="onSlideChange">
             <swiper-slide v-for="tv in series" :key="tv">
-                <div class="card" v-bind:style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w342/'+  tv.poster_path + ')' }">
-                    <h1 v-if="hover">{{tv.title}}</h1>
+                <div class="card">
+                    <img :src= "'https://image.tmdb.org/t/p/w342/'+  tv.poster_path">
                 </div>
             </swiper-slide>
         </swiper>
     </div>
 
-
-
-<div id="cont" v-if="series" >
-        <swiper
-      :slides-per-view="3"
-      :space-between="30"
-      :loop="true"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-    >
-      <swiper-slide
-        v-for="k in testArray"
-        :key="k"
-        class="test"
-        :class="{test_2: true}"
-      >
-        <img :src= 'k.image'>
-      </swiper-slide>
-    </swiper>
-</div>
 
 
 
