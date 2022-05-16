@@ -15,16 +15,19 @@
                     <div class="infoCard">
                         <h1>{{film.original_title}}</h1>
                         <h2>{{film.overview}}</h2>
-                        <div>
-                            <ul>
-                                <li v-for="n in Math.round(film.vote_average / 2)" :key="n">
-                                <font-awesome-icon icon="fa-solid fa-star" />
-                                </li>
-                                <li v-for="n in (5 - Math.round(film.vote_average / 2))" :key="n">
-                                <font-awesome-icon icon="fa-regular fa-star" />
-                                </li>
-                            </ul>
-                        </div>
+                        <ul id="stars">
+                            <li v-for="n in Math.round(film.vote_average / 2)" :key="n">
+                            a
+                            </li>
+                            <li v-for="n in (5 - Math.round(film.vote_average / 2))" :key="n">
+                            <font-awesome-icon icon="fa-regular fa-star" />
+                            </li>
+                        </ul>
+                        <ul id="language">
+                            <li>
+                                <img :src="getFlag(film.original_language)">
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </swiper-slide>
@@ -45,6 +48,13 @@
 
 <script>
 import axios from 'axios';
+
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { faStar } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// library.add(faStar)
+// Vue.component(font-awesome-icon, FontAwesomeIcon)
 
 import { Navigation, Pagination } from 'swiper'
 import { SwiperCore, Swiper, SwiperSlide } from 'swiper-vue2'
@@ -106,6 +116,17 @@ export default{
             }).catch((err)=>{
                 console.log(err);
             })
+        },
+        getFlag(flagName){
+            if(flagName === 'es'){
+                return 'https://cdn.discordapp.com/attachments/824615274413817866/975533369645482004/1.png'
+            } else if(flagName === 'en'){
+                return 'https://cdn.discordapp.com/attachments/824615274413817866/975533369846800425/2.png'
+            } else if(flagName === 'pt'){
+                return 'https://cdn.discordapp.com/attachments/824615274413817866/975533370056532010/3.png'
+            } else{
+                return 'https://cdn.discordapp.com/attachments/824615274413817866/975533357653950464/4.png'
+            }
         }
     }
 }
@@ -183,6 +204,18 @@ main{
                     h2{
                         color: rgb(180, 180, 180);
                         font-size: 1.3rem;
+                    }
+                    ul{
+                        margin-top: 15px;
+                        display: flex;
+                        justify-content: center;
+                        gap: 10px;
+                        list-style: none;
+                    }
+                    #language{
+                        img{
+                            width: 50px;
+                        }
                     }
                 }
 
