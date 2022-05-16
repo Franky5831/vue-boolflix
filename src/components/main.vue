@@ -35,9 +35,28 @@
 
         <h1>Serie TV</h1>
         <swiper :slides-per-view="4" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide v-for="tv in series" :key="tv">
+            <swiper-slide v-for="tv in series" :key="tv.id" @mouseover="hover = true" @mouseleave="hover = false">
                 <div class="card">
-                    <img :src= "'https://image.tmdb.org/t/p/w342/'+  tv.poster_path">
+                    <div class="posterCard">
+                        <img :src= "'https://image.tmdb.org/t/p/w342/'+  tv.poster_path">
+                    </div>
+                    <div class="infoCard">
+                        <h1>{{tv.original_name}}</h1>
+                        <h2>{{tv.overview}}</h2>
+                        <ul id="stars">
+                            <li v-for="n in Math.round(tv.vote_average / 2)" :key="n">
+                            a
+                            </li>
+                            <li v-for="n in (5 - Math.round(tv.vote_average / 2))" :key="n">
+                            <font-awesome-icon icon="fa-regular fa-star" />
+                            </li>
+                        </ul>
+                        <ul id="language">
+                            <li>
+                                <img :src="getFlag(tv.original_language)">
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </swiper-slide>
         </swiper>
@@ -49,12 +68,7 @@
 <script>
 import axios from 'axios';
 
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { faStar } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-// library.add(faStar)
-// Vue.component(font-awesome-icon, FontAwesomeIcon)
 
 import { Navigation, Pagination } from 'swiper'
 import { SwiperCore, Swiper, SwiperSlide } from 'swiper-vue2'
@@ -147,10 +161,6 @@ export default{
   margin-right: auto;
 }
 
-.swiper-slide{
-  width: 350px;
-  margin: 20px;
-}
 
 main{
     margin: 20px 50px;
